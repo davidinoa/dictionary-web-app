@@ -86,10 +86,15 @@
   font-variation-settings: 'wght' 400;
 }
 
+*:focus {
+  outline-color: #a445ed;
+}
+
 body {
   padding: 24px;
   max-width: 737px;
   margin: auto;
+  color: #050505;
 }
 
 .dark-mode-enabled path {
