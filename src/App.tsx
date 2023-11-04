@@ -1,4 +1,5 @@
 import Header from './Header'
+import Meanings from './Meanings'
 import SearchField from './SearchField'
 import PlayIcon from './assets/images/icon-play.svg?react'
 
@@ -19,6 +20,7 @@ export default function App() {
             <PlayIcon className="[&_*]:transition-all [&_*]:duration-200 [&_circle]:hover:opacity-100 [&_path]:hover:fill-white" />
           </button>
         </section>
+        <Meanings />
       </main>
     </div>
   )
