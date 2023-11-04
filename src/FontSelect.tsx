@@ -18,7 +18,7 @@ export default function FontSelect() {
           {selectedFont.name}
           <IconArrowDown />
         </Listbox.Button>
-        <Listbox.Options className="absolute right-0 top-8 flex min-w-[180px] flex-col gap-4 rounded-3xl bg-white p-6 shadow-xl">
+        <Listbox.Options className="absolute right-0 top-8 z-10 flex min-w-[180px] flex-col gap-4 rounded-3xl bg-white p-6 shadow-xl">
           {fontOptions.map((font) => (
             <Listbox.Option key={font.id} value={font} as={Fragment}>
               {({ selected }) => (

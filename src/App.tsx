@@ -13,10 +13,10 @@ export default function App() {
           <h1 className="flex grow flex-col gap-2">
             <span className="text-3xl font-bold">keyboard</span>
             <span aria-label="pronunciation" className="text-lavender">
-              /'kiːbɔːrd/
+              /&apos;kiːbɔːrd/
             </span>
           </h1>
-          <button>
+          <button type="button" aria-label="play word pronunciation">
             <PlayIcon className="[&_*]:transition-all [&_*]:duration-200 [&_circle]:hover:opacity-100 [&_path]:hover:fill-white" />
           </button>
         </section>

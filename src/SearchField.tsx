@@ -23,11 +23,6 @@ export default function SearchField() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
-    if (isInputValid()) {
-      setFieldState((state) => ({ ...state, isValid: false }))
-      return
-    }
   }
 
   return (
@@ -47,7 +42,7 @@ export default function SearchField() {
             !isValid ? 'border border-red' : ''
           }`}
         />
-        <button className="absolute right-0 top-1/2 -translate-y-1/2 px-6 py-4">
+        <button className="absolute right-0 top-1/2 -translate-y-1/2 rounded-2xl px-6 py-4">
           <SearchIcon />
         </button>
       </div>

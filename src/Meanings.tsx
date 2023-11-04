@@ -71,5 +71,43 @@ const data = [
 ]
 
 export default function Meanings() {
-  return <pre>{JSON.stringify(data, null, 2)}</pre>
+  const wordData = data[0]
+  return (
+    <div className="flex flex-col gap-8">
+      {wordData.meanings.map((meaning) => (
+        <section key={meaning.partOfSpeech}>
+          <h2
+            className="mb-8 flex items-center gap-4 text-lg font-bold"
+            style={{ fontVariationSettings: "'slnt' -10" }}
+          >
+            {meaning.partOfSpeech}
+            <hr className="w-full" />
+          </h2>
+          <div className="mb-6">
+            <h3 className="mb-4 text-gray-silver">Meaning</h3>
+            <ul className="flex list-disc flex-col gap-3 pl-4 marker:text-lavender">
+              {meaning.definitions.map(({ definition, ...rest }) => (
+                <li key={definition} className="pl-2">
+                  <p>{definition}</p>
+                  {'example' in rest && <p>{rest.example}</p>}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {meaning.synonyms.length > 0 && (
+            <div className="flex gap-6">
+              <h3 className="text-gray-silver">Synonyms</h3>
+              <ul className="flex gap-4">
+                {meaning.synonyms.map((synonym) => (
+                  <li className="font-bold text-lavender" key={synonym}>
+                    {synonym}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      ))}
+    </div>
+  )
 }
