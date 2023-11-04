@@ -95,6 +95,7 @@ body {
   max-width: 737px;
   margin: auto;
   color: #050505;
+  height: 100vh;
 }
 
 .dark-mode-enabled path {
