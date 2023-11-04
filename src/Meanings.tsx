@@ -1,3 +1,5 @@
+import NewWindowIcon from './assets/images/icon-new-window.svg?react'
+
 const data = [
   {
     word: 'keyboard',
@@ -88,8 +90,12 @@ export default function Meanings() {
             <ul className="flex list-disc flex-col gap-3 pl-4 marker:text-lavender">
               {meaning.definitions.map(({ definition, ...rest }) => (
                 <li key={definition} className="pl-2">
-                  <p>{definition}</p>
-                  {'example' in rest && <p>{rest.example}</p>}
+                  <p className="mb-3">{definition}</p>
+                  {'example' in rest && (
+                    <p className="text-gray-silver">
+                      &ldquo;{rest.example}&rdquo;
+                    </p>
+                  )}
                 </li>
               ))}
             </ul>
@@ -108,6 +114,27 @@ export default function Meanings() {
           )}
         </section>
       ))}
+      <footer>
+        <hr className="mb-6" />
+        <h4 className="mb-2 text-sm text-gray-silver underline">
+          {wordData.sourceUrls.length > 1 ? 'Sources' : 'Source'}
+        </h4>
+        <ul className="flex gap-4 text-sm">
+          {wordData.sourceUrls.map((sourceUrl) => (
+            <li key={sourceUrl}>
+              <a
+                href={sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 underline"
+              >
+                {sourceUrl}
+                <NewWindowIcon />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </footer>
     </div>
   )
 }
