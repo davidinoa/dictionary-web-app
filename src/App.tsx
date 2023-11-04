@@ -2,10 +2,13 @@ import Header from './Header'
 import Meanings from './Meanings'
 import SearchField from './SearchField'
 import PlayIcon from './assets/images/icon-play.svg?react'
+import useFontStore from './stores/useFontStore'
 
 export default function App() {
+  const fontClassName = useFontStore((state) => state.font.className)
+
   return (
-    <div className="flex flex-col gap-6">
+    <div className={`flex flex-col gap-6 ${fontClassName}`}>
       <Header />
       <SearchField />
       <main className="grow">

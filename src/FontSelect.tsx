@@ -1,6 +1,7 @@
-import { Fragment, useState } from 'react'
-import IconArrowDown from './assets/images/icon-arrow-down.svg?react'
+import { Fragment } from 'react'
 import { Listbox } from '@headlessui/react'
+import IconArrowDown from './assets/images/icon-arrow-down.svg?react'
+import useFontStore from './stores/useFontStore'
 
 const fontOptions = [
   { id: 'sansSerif', name: 'Sans Serif', className: 'font-sans' },
@@ -9,25 +10,25 @@ const fontOptions = [
 ]
 
 export default function FontSelect() {
-  const [selectedFont, setSelectedFont] = useState(fontOptions[0])
+  const { font: selectedFont, setFont } = useFontStore()
 
   return (
     <div className="relative gap-4 text-sm font-bold">
-      <Listbox value={selectedFont} onChange={setSelectedFont}>
+      <Listbox value={selectedFont} onChange={setFont}>
         <Listbox.Button className="flex items-center gap-3">
           {selectedFont.name}
           <IconArrowDown />
         </Listbox.Button>
-        <Listbox.Options className="absolute right-0 top-8 z-10 flex min-w-[180px] flex-col gap-4 rounded-3xl bg-white p-6 shadow-xl">
+        <Listbox.Options className="absolute right-0 top-8 z-10 flex min-w-[180px] flex-col rounded-3xl bg-white py-4 shadow-xl">
           {fontOptions.map((font) => (
             <Listbox.Option key={font.id} value={font} as={Fragment}>
-              {({ selected }) => (
+              {({ selected, active }) => (
                 <li
-                  className={`${font.className} ${
+                  className={`px-6 py-2 ${font.className} ${
                     selected || selectedFont.name === font.name
                       ? 'text-lavender'
                       : ''
-                  }`}
+                  } ${active ? 'bg-gray-platinum' : ''}`}
                 >
                   {font.name}
                 </li>
