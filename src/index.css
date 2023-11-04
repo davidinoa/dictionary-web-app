@@ -91,3 +91,7 @@ body {
   max-width: 737px;
   margin: auto;
 }
+
+.dark-mode-enabled path {
+  stroke: #a445ed;
+}

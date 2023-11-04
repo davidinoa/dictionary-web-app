@@ -16,7 +16,7 @@ export default function FontSelect() {
       <Listbox value={selectedFont} onChange={setSelectedFont}>
         <Listbox.Button className="flex items-center gap-3">
           {selectedFont.name}
-          <IconArrowDown className="stroke-lavender" />
+          <IconArrowDown />
         </Listbox.Button>
         <Listbox.Options className="absolute right-0 top-8 flex min-w-[180px] flex-col gap-4 rounded-3xl bg-white p-6 shadow-xl">
           {fontOptions.map((font) => (
@@ -24,8 +24,9 @@ export default function FontSelect() {
               {({ selected }) => (
                 <li
                   className={`${font.className} ${
-                    (selected || selectedFont.name === font.name) &&
-                    'text-lavender'
+                    selected || selectedFont.name === font.name
+                      ? 'text-lavender'
+                      : ''
                   }`}
                 >
                   {font.name}

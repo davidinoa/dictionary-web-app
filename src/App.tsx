@@ -1,3 +1,4 @@
+import DarkModeSwitch from './DarkModeSwitch'
 import FontSelect from './FontSelect'
 import Logo from './assets/images/logo.svg?react'
 
@@ -10,7 +11,7 @@ export default function App() {
         </div>
         <FontSelect />
         <div className="h-8 w-1 border-r"></div>
-        <div>color scheme</div>
+        <DarkModeSwitch />
       </header>
       <h1 className="font-serif text-3xl font-bold text-black underline">
         Hello world!
