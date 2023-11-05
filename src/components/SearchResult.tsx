@@ -103,7 +103,7 @@ export default function SearchResult() {
             )}
           </section>
         ))}
-        <footer>
+        <footer className="pb-6">
           <hr className="mb-6" />
           <h4 className="mb-2 text-sm text-gray-silver underline">
             {result.sourceUrls.length > 1 ? 'Sources' : 'Source'}
