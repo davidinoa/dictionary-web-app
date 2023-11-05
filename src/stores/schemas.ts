@@ -15,13 +15,15 @@ const DefinitionSchema = z.object({
 const MeaningSchema = z.object({
   partOfSpeech: z.string(),
   definitions: z.array(DefinitionSchema),
+  synonyms: z.array(z.string()),
+  antonyms: z.array(z.string()),
 })
 
 export const ApiResponseSchema = z.object({
   word: z.string(),
   phonetic: z.string(),
   phonetics: z.array(PhoneticSchema),
-  origin: z.string().optional(),
+  sourceUrls: z.array(z.string()),
   meanings: z.array(MeaningSchema),
 })
 
