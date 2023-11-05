@@ -37,16 +37,19 @@ export default function SearchField() {
           value={value}
           onChange={handleChange}
           onBlur={handleBlur}
-          minLength={1}
-          className={`w-full rounded-2xl bg-gray-platinum px-6 py-4 pr-16 font-bold ${
-            !isValid ? 'border border-red' : ''
+          className={`w-full rounded-2xl bg-gray-platinum px-6 py-4 pr-16 font-bold focus:outline-none focus:ring-2 focus:ring-lavender  dark:bg-gray-dark dark:text-white ${
+            !isValid ? 'border border-red focus:border-none' : ''
           }`}
         />
-        <button className="absolute right-0 top-1/2 -translate-y-1/2 rounded-2xl px-6 py-4">
+        <button
+          type="submit"
+          aria-label="search button"
+          className="absolute right-0 top-1/2 -translate-y-1/2 rounded-2xl px-6 py-4"
+        >
           <SearchIcon />
         </button>
       </div>
-      {!isValid && <p className="text-red">Whoops, can't be empty...</p>}
+      {!isValid && <p className="text-red">Whoops, can&apos;t be empty...</p>}
     </form>
   )
 }
