@@ -5,7 +5,9 @@ import usePronunciatonAudio from '../hooks/usePronunciationAudio'
 
 export default function SearchResult() {
   const result = useSearchStore((state) => state.result)
-  const pronunciation = result?.phonetics.find((p) => p.audio?.length)
+  const pronunciation = result?.phonetics.find(
+    (p) => p.text?.length && p.audio?.length,
+  )
   const pronunciationAudioSrc = pronunciation?.audio
   const pronunciationAudio = usePronunciatonAudio(pronunciationAudioSrc)
 
@@ -49,7 +51,7 @@ export default function SearchResult() {
               aria-label="pronunciation"
               className="text-lavender sm:text-2xl"
             >
-              {result.phonetic}
+              {pronunciation?.text}
             </span>
           </h1>
           {pronunciationAudio && (

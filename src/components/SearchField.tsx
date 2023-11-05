@@ -23,10 +23,10 @@ export default function SearchField() {
   })
 
   useEffect(() => {
-    if (searchResult.data) {
+    if (searchResult.data && searchResult.fetchStatus === 'idle') {
       setResult(searchResult.data[0])
     }
-  }, [searchResult.data, setResult])
+  }, [searchResult.data, searchResult.fetchStatus, setResult])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setQuery(event.target.value)

@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 const PhoneticSchema = z.object({
-  text: z.string(),
+  text: z.string().optional(),
   audio: z.string().optional(),
 })
 
