@@ -18,7 +18,7 @@ export default function SearchField() {
       fetch(
         `https://api.dictionaryapi.dev/api/v2/entries/en/${debouncedQuery}`,
       ).then((res) => res.json()),
-    enabled: Boolean(debouncedQuery),
+    enabled: false,
     staleTime: Infinity,
   })
 
@@ -31,10 +31,13 @@ export default function SearchField() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setQuery(event.target.value)
 
-  const handleBlur = () => setIsQueryValid(Boolean(query.trim() !== ''))
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    const isValid = Boolean(query.trim() !== '')
+    setIsQueryValid(isValid)
+    if (isValid) {
+      searchResult.refetch()
+    }
   }
 
   return (
@@ -47,11 +50,11 @@ export default function SearchField() {
           type="text"
           placeholder="Search for any word..."
           onChange={handleChange}
-          onBlur={handleBlur}
           className={` w-full rounded-2xl bg-gray-platinum px-6 py-4 pr-16 font-bold placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-lavender  dark:bg-gray-dark dark:text-white ${
             !isQueryValid ? 'border border-red focus:border-none' : ''
           }`}
         />
+        <input type="submit" value="Submit" className="sr-only" />
         <button
           type="submit"
           aria-label="search button"
