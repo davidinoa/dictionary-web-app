@@ -68,20 +68,20 @@ export default function SearchResult() {
         {result.meanings.map((meaning) => (
           <section key={meaning.partOfSpeech}>
             <h2
-              className="mb-8 flex items-center gap-4 text-lg font-bold"
+              className="mb-8 flex items-center gap-4 text-lg font-bold sm:text-2xl"
               style={{ fontVariationSettings: "'slnt' -10" }}
             >
               {meaning.partOfSpeech}
               <hr className="w-full" />
             </h2>
             <div>
-              <h3 className="mb-4 text-gray-silver">Meaning</h3>
+              <h3 className="mb-4 text-gray-silver sm:text-xl">Meaning</h3>
               <ul className="flex list-disc flex-col gap-3 pl-4 marker:text-lavender">
                 {meaning.definitions.map(({ definition, ...rest }) => (
                   <li key={definition} className="pl-2">
-                    <p className="mb-1">{definition}</p>
+                    <p className="mb-2 sm:text-lg">{definition}</p>
                     {'example' in rest && (
-                      <p className="text-gray-silver">
+                      <p className="text-gray-silver sm:text-lg">
                         &ldquo;{rest.example}&rdquo;
                       </p>
                     )}
@@ -90,9 +90,9 @@ export default function SearchResult() {
               </ul>
             </div>
             {meaning.synonyms.length > 0 && (
-              <div className="mt-6 flex flex-col gap-4">
+              <div className="mt-6 flex flex-col gap-4 sm:text-xl">
                 <h3 className="text-gray-silver">Synonyms</h3>
-                <ul className="flex flex-wrap gap-2">
+                <ul className="flex flex-wrap gap-x-4">
                   {[...new Set(meaning.synonyms)].map((synonym) => (
                     <li className="font-bold text-lavender" key={synonym}>
                       {synonym}
