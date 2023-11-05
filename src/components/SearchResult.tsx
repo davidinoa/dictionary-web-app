@@ -1,7 +1,7 @@
-import NewWindowIcon from './assets/images/icon-new-window.svg?react'
-import useSearchStore from './stores/useSearchStore'
-import PlayIcon from './assets/images/icon-play.svg?react'
-import usePronunciatonAudio from './usePronunciationAudio'
+import NewWindowIcon from '../assets/images/icon-new-window.svg?react'
+import useSearchStore from '../stores/useSearchStore'
+import PlayIcon from '../assets/images/icon-play.svg?react'
+import usePronunciatonAudio from '../hooks/usePronunciationAudio'
 
 export default function SearchResult() {
   const result = useSearchStore((state) => state.result)

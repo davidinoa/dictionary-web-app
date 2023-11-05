@@ -1,7 +1,7 @@
 import { Switch } from '@headlessui/react'
 import { useEffect } from 'react'
-import MoonIcon from './assets/images/icon-moon.svg?react'
-import useDarkModeStore from './stores/useDarkModeStore'
+import MoonIcon from '../assets/images/icon-moon.svg?react'
+import useDarkModeStore from '../stores/useDarkModeStore'
 
 export default function DarkModeSwitch() {
   const { isDarkMode, setIsDarkMode } = useDarkModeStore()

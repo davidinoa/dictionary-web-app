@@ -1,6 +1,6 @@
 import DarkModeSwitch from './DarkModeSwitch'
 import FontSelect from './FontSelect'
-import Logo from './assets/images/logo.svg?react'
+import Logo from '../assets/images/logo.svg?react'
 
 export default function Header() {
   return (
@@ -9,7 +9,7 @@ export default function Header() {
         <Logo className="h-9" />
       </div>
       <FontSelect />
-      <div className="h-8 w-1 border-r"></div>
+      <div className="h-8 w-1 border-r" />
       <DarkModeSwitch />
     </header>
   )

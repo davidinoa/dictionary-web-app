@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useDebounce } from '@uidotdev/usehooks'
 import { useQuery } from '@tanstack/react-query'
-import SearchIcon from './assets/images/icon-search.svg?react'
-import useSearchStore from './stores/useSearchStore'
+import SearchIcon from '../assets/images/icon-search.svg?react'
+import useSearchStore from '../stores/useSearchStore'
 
 export default function SearchField() {
   const { query, setQuery, setResult } = useSearchStore((state) => ({

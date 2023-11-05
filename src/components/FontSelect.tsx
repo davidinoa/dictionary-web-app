@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Listbox } from '@headlessui/react'
-import IconArrowDown from './assets/images/icon-arrow-down.svg?react'
-import useFontStore from './stores/useFontStore'
+import IconArrowDown from '../assets/images/icon-arrow-down.svg?react'
+import useFontStore from '../stores/useFontStore'
 
 const fontOptions = [
   { id: 'sansSerif', name: 'Sans Serif', className: 'font-sans' },

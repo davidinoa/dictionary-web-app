@@ -6,7 +6,7 @@ type DarkModeState = {
 }
 
 const useDarkModeStore = create<DarkModeState>((set) => ({
-  isDarkMode: false,
+  isDarkMode: window.matchMedia('(prefers-color-scheme: dark)').matches,
   setIsDarkMode: (isDarkMode: boolean) => set({ isDarkMode }),
 }))
 
