@@ -1,4 +1,5 @@
 import NewWindowIcon from './assets/images/icon-new-window.svg?react'
+import useSearchStore from './stores/useSearchStore'
 
 const data = [
   {
@@ -73,6 +74,7 @@ const data = [
 ]
 
 export default function Meanings() {
+  const { result } = useSearchStore()
   const wordData = data[0]
   return (
     <div className="flex flex-col gap-8">

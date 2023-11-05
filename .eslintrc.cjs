@@ -9,6 +9,7 @@ module.exports = {
     'airbnb/hooks',
     'airbnb-typescript',
     'prettier',
+    'plugin:@tanstack/eslint-plugin-query/recommended',
   ],
   ignorePatterns: [
     'dist',
