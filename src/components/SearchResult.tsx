@@ -9,33 +9,63 @@ export default function SearchResult() {
   const pronunciationAudioSrc = pronunciation?.audio
   const pronunciationAudio = usePronunciatonAudio(pronunciationAudioSrc)
 
-  if (!result) {
-    return 'Start searching...'
+  if (result === undefined) {
+    return (
+      <div className="flex max-w-[46rem] flex-col items-center gap-6">
+        <span className="text-[4rem]">🤔</span>
+        <h2 className="text-xl font-bold">Ready to Search?</h2>
+        <p className="text-center text-lg text-gray-silver">
+          Looks like you haven&apos;t started searching yet. Type a word into
+          the search box and we&apos;ll help find the definition for you. Give
+          it a go!
+        </p>
+      </div>
+    )
   }
 
-  const wordData = result
+  if (result === null) {
+    return (
+      <div className="flex max-w-[46rem] flex-col items-center gap-6">
+        <span className="text-[4rem]">😕</span>
+        <h2 className="text-xl font-bold">No Definitions Found</h2>
+        <p className="text-center text-lg text-gray-silver">
+          Sorry pal, we couldnt find definitions for the word you were looking
+          for. You can try the search again at later time or head to the web
+          instead.
+        </p>
+      </div>
+    )
+  }
 
   return (
-    <>
-      <section className="flex items-center">
-        <h1 className="flex grow flex-col gap-2">
-          <span className="text-3xl font-bold">{result.word}</span>
-          <span aria-label="pronunciation" className="text-lavender">
-            {result.phonetic}
-          </span>
-        </h1>
-        {pronunciationAudio && (
-          <button
-            type="button"
-            aria-label="play word pronunciation"
-            onClick={() => pronunciationAudio.play()}
-          >
-            <PlayIcon className="[&_*]:transition-all [&_*]:duration-200 [&_circle]:hover:opacity-100 [&_path]:hover:fill-white" />
-          </button>
-        )}
-      </section>
-      <div className="flex flex-col gap-8">
-        {wordData.meanings.map((meaning) => (
+    <main className="grow">
+      <div className="flex flex-col gap-8 sm:gap-10">
+        <section className="flex items-center">
+          <h1 className="flex grow flex-col gap-2">
+            <span className="text-3xl font-bold sm:text-6xl">
+              {result.word}
+            </span>
+            <span
+              aria-label="pronunciation"
+              className="text-lavender sm:text-2xl"
+            >
+              {result.phonetic}
+            </span>
+          </h1>
+          {pronunciationAudio && (
+            <button
+              type="button"
+              aria-label="play word pronunciation"
+              onClick={() => pronunciationAudio.play()}
+            >
+              <PlayIcon
+                width={48}
+                className="sm:w-[75px] [&_*]:transition-all [&_*]:duration-200 [&_circle]:hover:opacity-100 [&_path]:hover:fill-white"
+              />
+            </button>
+          )}
+        </section>
+        {result.meanings.map((meaning) => (
           <section key={meaning.partOfSpeech}>
             <h2
               className="mb-8 flex items-center gap-4 text-lg font-bold"
@@ -44,7 +74,7 @@ export default function SearchResult() {
               {meaning.partOfSpeech}
               <hr className="w-full" />
             </h2>
-            <div className="mb-6">
+            <div>
               <h3 className="mb-4 text-gray-silver">Meaning</h3>
               <ul className="flex list-disc flex-col gap-3 pl-4 marker:text-lavender">
                 {meaning.definitions.map(({ definition, ...rest }) => (
@@ -60,7 +90,7 @@ export default function SearchResult() {
               </ul>
             </div>
             {meaning.synonyms.length > 0 && (
-              <div className="flex flex-col gap-6">
+              <div className="mt-6 flex flex-col gap-6">
                 <h3 className="text-gray-silver">Synonyms</h3>
                 <ul className="flex flex-wrap gap-4">
                   {[...new Set(meaning.synonyms)].map((synonym) => (
@@ -76,10 +106,10 @@ export default function SearchResult() {
         <footer>
           <hr className="mb-6" />
           <h4 className="mb-2 text-sm text-gray-silver underline">
-            {wordData.sourceUrls.length > 1 ? 'Sources' : 'Source'}
+            {result.sourceUrls.length > 1 ? 'Sources' : 'Source'}
           </h4>
           <ul className="flex gap-4 text-sm">
-            {wordData.sourceUrls.map((sourceUrl) => (
+            {result.sourceUrls.map((sourceUrl) => (
               <li key={sourceUrl}>
                 <a
                   href={sourceUrl}
@@ -95,6 +125,6 @@ export default function SearchResult() {
           </ul>
         </footer>
       </div>
-    </>
+    </main>
   )
 }

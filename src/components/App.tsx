@@ -10,12 +10,10 @@ export default function App() {
     <div
       className={`${fontClassName} text-charcoal h-full p-6 dark:bg-black dark:text-white`}
     >
-      <div className="m-auto flex h-full max-w-[737px] flex-col gap-6 dark:bg-black">
+      <div className="m-auto flex h-full max-w-[737px] flex-col gap-6 dark:bg-black sm:gap-12">
         <Header />
         <SearchField />
-        <main className="grow">
-          <SearchResult />
-        </main>
+        <SearchResult />
       </div>
     </div>
   )

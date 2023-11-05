@@ -21,7 +21,7 @@ const MeaningSchema = z.object({
 
 export const ApiResponseSchema = z.object({
   word: z.string(),
-  phonetic: z.string(),
+  phonetic: z.string().optional(),
   phonetics: z.array(PhoneticSchema),
   sourceUrls: z.array(z.string()),
   meanings: z.array(MeaningSchema),

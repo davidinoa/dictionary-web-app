@@ -3,14 +3,14 @@ import { ApiResponse, ApiResponseSchema } from './schemas'
 
 type SearchState = {
   query: string
-  result: ApiResponse | null
+  result?: ApiResponse | null
   setQuery: (query: string) => void
   setResult: (result: unknown) => void
 }
 
 const useSearchStore = create<SearchState>((set) => ({
   query: '',
-  result: null,
+  result: undefined,
   setQuery: (query) => set({ query }),
   setResult: (result: unknown) => {
     try {
