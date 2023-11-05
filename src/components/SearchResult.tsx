@@ -79,7 +79,7 @@ export default function SearchResult() {
               <ul className="flex list-disc flex-col gap-3 pl-4 marker:text-lavender">
                 {meaning.definitions.map(({ definition, ...rest }) => (
                   <li key={definition} className="pl-2">
-                    <p className="mb-3">{definition}</p>
+                    <p className="mb-1">{definition}</p>
                     {'example' in rest && (
                       <p className="text-gray-silver">
                         &ldquo;{rest.example}&rdquo;
@@ -90,9 +90,9 @@ export default function SearchResult() {
               </ul>
             </div>
             {meaning.synonyms.length > 0 && (
-              <div className="mt-6 flex flex-col gap-6">
+              <div className="mt-6 flex flex-col gap-4">
                 <h3 className="text-gray-silver">Synonyms</h3>
-                <ul className="flex flex-wrap gap-4">
+                <ul className="flex flex-wrap gap-2">
                   {[...new Set(meaning.synonyms)].map((synonym) => (
                     <li className="font-bold text-lavender" key={synonym}>
                       {synonym}
