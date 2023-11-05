@@ -1,25 +1,40 @@
+import { useMemo, useRef } from 'react'
 import NewWindowIcon from './assets/images/icon-new-window.svg?react'
 import useSearchStore from './stores/useSearchStore'
 import PlayIcon from './assets/images/icon-play.svg?react'
 
 export default function SearchResult() {
   const result = useSearchStore((state) => state.result)
+  const pronunciation = result?.phonetics.find((p) => p.audio?.length)
+  const pronunciationAudioSrc = pronunciation?.audio
+  const pronunciationAudio = useMemo(
+    () => new Audio(pronunciationAudioSrc),
+    [pronunciationAudioSrc],
+  )
+
   if (!result) {
     return 'Start searching...'
   }
   const wordData = result
+
   return (
     <>
       <section className="flex items-center">
         <h1 className="flex grow flex-col gap-2">
           <span className="text-3xl font-bold">{result.word}</span>
           <span aria-label="pronunciation" className="text-lavender">
-            /&apos;kiːbɔːrd/
+            {result.phonetic}
           </span>
         </h1>
-        <button type="button" aria-label="play word pronunciation">
-          <PlayIcon className="[&_*]:transition-all [&_*]:duration-200 [&_circle]:hover:opacity-100 [&_path]:hover:fill-white" />
-        </button>
+        {pronunciationAudioSrc && (
+          <button
+            type="button"
+            aria-label="play word pronunciation"
+            onClick={() => pronunciationAudio.play()}
+          >
+            <PlayIcon className="[&_*]:transition-all [&_*]:duration-200 [&_circle]:hover:opacity-100 [&_path]:hover:fill-white" />
+          </button>
+        )}
       </section>
       <div className="flex flex-col gap-8">
         {wordData.meanings.map((meaning) => (
