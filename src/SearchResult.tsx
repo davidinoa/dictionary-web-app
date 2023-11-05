@@ -1,20 +1,18 @@
-import { useMemo, useRef } from 'react'
 import NewWindowIcon from './assets/images/icon-new-window.svg?react'
 import useSearchStore from './stores/useSearchStore'
 import PlayIcon from './assets/images/icon-play.svg?react'
+import usePronunciatonAudio from './usePronunciationAudio'
 
 export default function SearchResult() {
   const result = useSearchStore((state) => state.result)
   const pronunciation = result?.phonetics.find((p) => p.audio?.length)
   const pronunciationAudioSrc = pronunciation?.audio
-  const pronunciationAudio = useMemo(
-    () => new Audio(pronunciationAudioSrc),
-    [pronunciationAudioSrc],
-  )
+  const pronunciationAudio = usePronunciatonAudio(pronunciationAudioSrc)
 
   if (!result) {
     return 'Start searching...'
   }
+
   const wordData = result
 
   return (
@@ -26,7 +24,7 @@ export default function SearchResult() {
             {result.phonetic}
           </span>
         </h1>
-        {pronunciationAudioSrc && (
+        {pronunciationAudio && (
           <button
             type="button"
             aria-label="play word pronunciation"
