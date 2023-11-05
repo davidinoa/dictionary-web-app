@@ -79,9 +79,9 @@ export default function SearchResult() {
               <ul className="flex list-disc flex-col gap-3 pl-4 marker:text-lavender">
                 {meaning.definitions.map(({ definition, ...rest }) => (
                   <li key={definition} className="pl-2">
-                    <p className="mb-2 sm:text-lg">{definition}</p>
+                    <p className="sm:text-lg">{definition}</p>
                     {'example' in rest && (
-                      <p className="text-gray-silver sm:text-lg">
+                      <p className="mt-2 text-gray-silver sm:text-lg">
                         &ldquo;{rest.example}&rdquo;
                       </p>
                     )}
