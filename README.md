@@ -1,4 +1,8 @@
-# Overview
+# Dictionary Web App
+
+![dictionary-web-app](https://github.com/davidinoa/dictionary-web-app/assets/31377820/b0215c1d-56e2-46af-8106-555dfa1d8eaa)
+
+## Overview
 
 This is a solution to the [Dictionary web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/dictionary-web-app-h5wwnyuKFL)
 
