@@ -12,8 +12,10 @@ export default function App() {
     >
       <div className="m-auto flex h-full max-w-[737px] flex-col gap-6 sm:gap-12 ">
         <Header />
-        <SearchField />
-        <SearchResult />
+        <main className="flex flex-col gap-6 sm:gap-12">
+          <SearchField />
+          <SearchResult />
+        </main>
       </div>
     </div>
   )

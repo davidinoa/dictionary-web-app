@@ -13,9 +13,9 @@ export default function SearchResult() {
 
   if (result === undefined) {
     return (
-      <div className="flex max-w-[46rem] flex-col items-center gap-6">
+      <div className="flex max-w-[46rem] grow flex-col items-center gap-6">
         <span className="text-[4rem]">🤔</span>
-        <h2 className="text-xl font-bold">Ready to Search?</h2>
+        <h1 className="text-xl font-bold">Ready to Search?</h1>
         <p className="text-center text-lg text-gray-silver">
           Looks like you haven&apos;t started searching yet. Type a word into
           the search box and we&apos;ll help find the definition for you. Give
@@ -27,9 +27,9 @@ export default function SearchResult() {
 
   if (result === null) {
     return (
-      <div className="flex max-w-[46rem] flex-col items-center gap-6">
+      <div className="flex max-w-[46rem] grow flex-col items-center gap-6">
         <span className="text-[4rem]">😕</span>
-        <h2 className="text-xl font-bold">No Definitions Found</h2>
+        <h1 className="text-xl font-bold">No Definitions Found</h1>
         <p className="text-center text-lg text-gray-silver">
           Sorry pal, we couldnt find definitions for the word you were looking
           for. You can try the search again at later time or head to the web
@@ -40,7 +40,7 @@ export default function SearchResult() {
   }
 
   return (
-    <main className="grow">
+    <div className="grow">
       <div className="flex flex-col gap-8 sm:gap-10">
         <section className="flex items-center">
           <h1 className="flex grow flex-col gap-2">
@@ -127,6 +127,6 @@ export default function SearchResult() {
           </ul>
         </footer>
       </div>
-    </main>
+    </div>
   )
 }
