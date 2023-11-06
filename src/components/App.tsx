@@ -8,7 +8,7 @@ export default function App() {
 
   return (
     <div
-      className={`${fontClassName} text-charcoal h-full w-full p-6 dark:bg-black dark:text-white`}
+      className={`${fontClassName} text-charcoal h-full w-full p-6 dark:bg-black dark:text-white sm:p-14`}
     >
       <div className="m-auto flex h-full max-w-[737px] flex-col gap-6 sm:gap-12 ">
         <Header />

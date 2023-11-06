@@ -50,7 +50,7 @@ export default function SearchField() {
           type="text"
           placeholder="Search for any word..."
           onChange={handleChange}
-          className={` w-full rounded-2xl bg-gray-platinum px-6 py-4 pr-16 font-bold placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-lavender  dark:bg-gray-dark dark:text-white ${
+          className={` w-full rounded-2xl bg-gray-platinum px-6 py-4 pr-16 font-bold placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-lavender dark:bg-gray-dark dark:text-white sm:py-5 sm:text-xl sm:leading-tight ${
             !isQueryValid ? 'border border-red focus:border-none' : ''
           }`}
         />
