@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDebounce } from '@uidotdev/usehooks'
 import { useQuery } from '@tanstack/react-query'
 import SearchIcon from '../assets/images/icon-search.svg?react'
@@ -11,6 +11,9 @@ export default function SearchField() {
     setResult: state.setResult,
   }))
   const [isQueryValid, setIsQueryValid] = useState(true)
+  const [enterPressed, setEnterPressed] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
+  const debouncedEnterPressed = useDebounce(enterPressed, 500)
   const debouncedQuery = useDebounce(query, 500)
   const searchResult = useQuery({
     queryKey: ['search', debouncedQuery],
@@ -28,8 +31,21 @@ export default function SearchField() {
     }
   }, [searchResult.data, searchResult.fetchStatus, setResult])
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+  useEffect(() => {
+    if (debouncedEnterPressed && formRef.current) {
+      formRef.current.dispatchEvent(
+        new Event('submit', {
+          cancelable: true,
+          bubbles: true,
+        }),
+      )
+      setEnterPressed(false)
+    }
+  }, [debouncedEnterPressed])
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value)
+  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -42,6 +58,7 @@ export default function SearchField() {
 
   return (
     <form
+      ref={formRef}
       className="flex flex-col gap-2 bg-transparent"
       onSubmit={handleSubmit}
     >
@@ -53,8 +70,13 @@ export default function SearchField() {
           className={` w-full rounded-2xl bg-gray-platinum px-6 py-4 pr-16 font-bold placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-lavender dark:bg-gray-dark dark:text-white sm:py-5 sm:text-xl sm:leading-tight ${
             !isQueryValid ? 'border border-red focus:border-none' : ''
           }`}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault()
+              setEnterPressed(true)
+            }
+          }}
         />
-        <input type="submit" value="Submit" className="sr-only" />
         <button
           type="submit"
           aria-label="search button"
