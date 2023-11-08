@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
-import { useDebounce } from '@uidotdev/usehooks'
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import SearchIcon from '../assets/images/icon-search.svg?react'
 import useSearchStore from '../stores/useSearchStore'
@@ -11,45 +10,25 @@ export default function SearchField() {
     setResult: state.setResult,
   }))
   const [isQueryValid, setIsQueryValid] = useState(true)
-  const [enterPressed, setEnterPressed] = useState(false)
-  const formRef = useRef<HTMLFormElement>(null)
-  const debouncedEnterPressed = useDebounce(enterPressed, 500)
-  const debouncedQuery = useDebounce(query, 500)
   const searchResult = useQuery({
-    queryKey: ['search', debouncedQuery],
+    queryKey: ['search', query],
     queryFn: () =>
-      fetch(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${debouncedQuery}`,
-      ).then((res) => res.json()),
+      fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${query}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setResult(data[0])
+          return data
+        }),
     enabled: false,
     staleTime: Infinity,
   })
-
-  useEffect(() => {
-    if (searchResult.data && searchResult.fetchStatus === 'idle') {
-      setResult(searchResult.data[0])
-    }
-  }, [searchResult.data, searchResult.fetchStatus, setResult])
-
-  useEffect(() => {
-    if (debouncedEnterPressed && formRef.current) {
-      formRef.current.dispatchEvent(
-        new Event('submit', {
-          cancelable: true,
-          bubbles: true,
-        }),
-      )
-      setEnterPressed(false)
-    }
-  }, [debouncedEnterPressed])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value)
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const isValid = Boolean(query.trim() !== '')
+  const handleSubmit = (querySubmitted: string) => {
+    const isValid = Boolean(querySubmitted.trim() !== '')
     setIsQueryValid(isValid)
     if (isValid) {
       searchResult.refetch()
@@ -58,12 +37,16 @@ export default function SearchField() {
 
   return (
     <form
-      ref={formRef}
       className="flex flex-col gap-2 bg-transparent"
-      onSubmit={handleSubmit}
+      onSubmit={(e) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        handleSubmit(formData.get('query') as string)
+      }}
     >
       <div className="relative leading-none">
         <input
+          name="query"
           type="text"
           placeholder="Search for any word..."
           onChange={handleChange}
@@ -73,7 +56,7 @@ export default function SearchField() {
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
               event.preventDefault()
-              setEnterPressed(true)
+              handleSubmit(event.currentTarget.value)
             }
           }}
         />
